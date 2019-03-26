@@ -157,6 +157,18 @@ Once running it will publish, among others, the following topics:
 - /camera/fisheye1/image_raw
 - /camera/fisheye2/image_raw
 
+## Occupancy mapping with T265 and D435/D415 ##
+Please be sure to specify the corresponding serial numbers of the two devices in
+
+https://github.com/intel-ros/realsense/blob/occupancy-mapping/occupancy/launch/cameras.launch.
+
+The demo can be started with
+```
+roslaunch occupancy occupancy_live_rviz.launch
+```
+which starts the cameras (streaming), the occupancy mapping node, and visualization in RViz.
+
+
 ## Packages using RealSense ROS Camera
 | Title | Links |
 | ----- | ----- |
