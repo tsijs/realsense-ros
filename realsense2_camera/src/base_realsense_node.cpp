@@ -1627,6 +1627,7 @@ void BaseRealSenseNode::publishPointCloud(rs2::points pc, const ros::Time& t, co
         }
         if (i >= 0.f && i <= 1.f && j >= 0.f && j <= 1.f)
         {
+            // TODO hack the green filter in here 
             *iter_x = vertex->x;
             *iter_y = vertex->y;
             *iter_z = vertex->z;

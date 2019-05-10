@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(realsense2_camera)
 
-option(BUILD_WITH_OPENMP "Use OpenMP" OFF)
+option(BUILD_WITH_OPENMP "Use OpenMP" ON)
 option(SET_USER_BREAK_AT_STARTUP "Set user wait point in startup (for debug)" OFF)
 
 find_package(catkin REQUIRED COMPONENTS
@@ -65,7 +65,7 @@ include_directories(
     )
 
 # Generate dynamic reconfigure options from .cfg files
-#generate_dynamic_reconfigure_options(
+#  generate_dynamic_reconfigure_options(
 #  cfg/base_d400_params.cfg
 #  cfg/sr300_params.cfg
 #  cfg/rs415_params.cfg
@@ -92,7 +92,7 @@ add_library(${PROJECT_NAME}
 
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_generate_messages_cpp)
 add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
-add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg)
+#add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg)
 
 
 target_include_directories(${PROJECT_NAME}
