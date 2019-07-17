@@ -1,0 +1,38 @@
+<launch>
+  <arg name="enable_pointcloud"         default="true"/>
+  <arg name="serial_no_camera1"    			default="827312070273"/> 			<!-- Note: Replace with actual serial number -->
+  <arg name="serial_no_camera2"    			default="827112072600"/> 			<!-- Note: Replace with actual serial number -->
+  <arg name="camera1"              			default="cam_tab"/>		<!-- Note: Replace with camera name -->
+  <arg name="camera2"              			default="cam_arm"/>		<!-- Note: Replace with camera name -->
+  <arg name="align_depth"              			default="true"/>		
+  <arg name="pointcloud_texture_stream" default="RS2_STREAM_COLOR"/>
+  <arg name="pointcloud_texture_index"  default="0"/>
+  <arg name="tf_prefix_camera1"           	default="cam_tab"/>
+  <arg name="tf_prefix_camera2"           	default="cam_arm"/>
+
+  <group ns="$(arg camera1)">
+    <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
+      <arg name="serial_no"     value="$(arg serial_no_camera1)"/>
+      <arg name="tf_prefix"		value="$(arg tf_prefix_camera1)"/>
+      <arg name="align_depth" value="$(arg align_depth)"/>
+      <arg name="enable_pointcloud"        value="$(arg enable_pointcloud)"/>
+      <arg name="pointcloud_texture_stream" value="$(arg pointcloud_texture_stream)"/>
+      <arg name="pointcloud_texture_index"  value="$(arg pointcloud_texture_index)"/>      
+      <remap from="/$(arg camera1)/depth/color/points" to="/voxblox_ros/pointcloud"/>
+
+    </include>
+  </group>
+
+  <group ns="$(arg camera2)">
+    <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
+      <arg name="serial_no"     value="$(arg serial_no_camera2)"/>
+      <arg name="tf_prefix"		value="$(arg tf_prefix_camera2)"/>
+      <arg name="align_depth" value="$(arg align_depth)"/>      
+      <arg name="enable_pointcloud"        value="$(arg enable_pointcloud)"/>
+      <arg name="pointcloud_texture_stream" value="$(arg pointcloud_texture_stream)"/>
+      <arg name="pointcloud_texture_index"  value="$(arg pointcloud_texture_index)"/>      
+      <remap from="depth/color/points" to="/voxblox_ros/pointcloud"/>
+      
+    </include>
+  </group>
+</launch>
